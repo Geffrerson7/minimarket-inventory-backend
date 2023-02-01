@@ -1,7 +1,7 @@
-import { UserRouter } from "../components";
+import { ProductRouter } from "../components";
  
 const routes = [
-    ["users", UserRouter]
+    ["products", ProductRouter]
 ]
 
 export const router = (app:any) => {
