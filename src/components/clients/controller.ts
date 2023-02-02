@@ -68,7 +68,7 @@ export const remove = async (req: Request, res: Response): Promise<void> => {
     await prisma.client.delete({
       where: { id },
     });
-    res.status(204).json({ ok: true, body: "", message: "Eliminado" });
+    res.status(204).json({ ok: true, body: "", message: "Deleted" });
   } catch (error) {
     res.status(500).json({ ok: false, body: error, message: "Server Error" });
   }
