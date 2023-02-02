@@ -1,7 +1,10 @@
-import { ProductRouter, SupplierRouter } from "../components";
-
+import { ProductRouter,OrderRouter,ClientRouter, userRouter, SupplierRouter } from "../components";
+ 
 const routes = [
     ["products", ProductRouter],
+    ["clients", ClientRouter],
+    ["orders",OrderRouter],
+    ["users",userRouter],
     ["suppliers", SupplierRouter]
 ]
 

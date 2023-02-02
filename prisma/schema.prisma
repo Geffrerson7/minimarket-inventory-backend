@@ -13,6 +13,7 @@ datasource db {
 model User {
   id    Int     @id @default(autoincrement())
   email String  @unique
+  phone_number  String?
   name  String?
   password      String
   last_session  DateTime?
@@ -57,7 +58,7 @@ model Category{
 
 model Client {
   id    Int @id @default(autoincrement())
-  document_id   String
+  document_id   String @unique
   name  String?
   order Order[]
 }
