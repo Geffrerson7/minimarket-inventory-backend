@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 export const store = async (req: Request, res: Response): Promise<void> => {
     try {
         const data = req.body;
-        await prisma.playlist.create({ data: data });
+        //await prisma.playlist.create({ data: data });
         res.status(201).json({ ok: true, message: "Playlist creado correctamente" });
     } catch(error) {
         console.log(error)
