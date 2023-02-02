@@ -1,9 +1,10 @@
-import { ProductRouter,OrderRouter,ClientRouter } from "../components";
+import { ProductRouter,OrderRouter,ClientRouter, userRouter } from "../components";
  
 const routes = [
     ["products", ProductRouter],
     ["clients", ClientRouter],
-    ["orders",OrderRouter]
+    ["orders",OrderRouter],
+    ["users",userRouter]
 ]
 
 export const router = (app:any) => {
