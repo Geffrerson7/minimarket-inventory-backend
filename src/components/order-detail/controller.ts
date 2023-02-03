@@ -6,13 +6,11 @@ const prisma = new PrismaClient();
 export const store = async (req: Request, res: Response): Promise<void> => {
     try {
         const data = req.body;
-
         await prisma.orderDetails.create({
             data: {
                 quantity: data.quantity,
                 product: { connect: { id: data.product_id } },
                 order: { connect: { id: data.order_id } },
-
             }
         });
         res.status(201).json({
@@ -35,7 +33,6 @@ export const getOne = async (req: Request, res: Response): Promise<void> => {
             include: {
                 product: true,
             },
-
         });
         res.json({ ok: true, data: orderDetail, message: "All the products of the order were obtained" });
     } catch (error) {
@@ -47,18 +44,15 @@ export const updateOne = async (req: Request, res: Response): Promise<void> => {
     try {
         const data = req.body;
         const idOrder = Number(req.params.idOrder);
-        const orderDetail = await prisma.orderDetails.updateMany({
+        await prisma.orderDetails.updateMany({
             where: {
                 order_id: idOrder,
                 id: data.orderDetail_id
             },
-
             data: {
                 product_id: data.product_id,
                 quantity: data.quantity
             }
-
-
         });
         const updateOrderDetail = await prisma.orderDetails.findMany({
             where: {
