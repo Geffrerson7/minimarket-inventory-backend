@@ -55,7 +55,7 @@ export const getOne = async (req: Request, res: Response): Promise<void> => {
         },
         order_details: {
           include: {
-            product: {},
+            product: true,
           },
         },
       },
