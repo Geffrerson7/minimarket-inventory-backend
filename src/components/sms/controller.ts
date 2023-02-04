@@ -10,7 +10,7 @@ const recieverNumber = process.env.RECIEVER_NUMBER;
 const prisma = new PrismaClient();
 const client = new Twilio(accountSid, authToken);
 
-export const test = async (req: Request, res: Response): Promise<void> => {
+export const sendSms = async (req: Request, res: Response): Promise<void> => {
   try {
     const createProducts = await prisma.product.create({ data: req.body });
     const productStock = await prisma.product.findMany({

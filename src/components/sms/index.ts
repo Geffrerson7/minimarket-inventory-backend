@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { test } from "./controller";
+import { sendSms } from "./controller";
 
 const smsRouter: Router = Router();
 
-smsRouter.post("/", test);
+smsRouter.post("/", sendSms);
 
 export default smsRouter;
