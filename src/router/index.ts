@@ -1,13 +1,11 @@
 import { ProductRouter, OrderRouter, ClientRouter, userRouter, SupplierRouter, OrderDetailRouter, categoryRouter } from "../components";
-//import { smsRouter } from "../services";
- 
+
 const routes = [
     ["products", ProductRouter],
     ["clients", ClientRouter],
     ["orders",OrderRouter],
     ["users",userRouter],
     ["suppliers", SupplierRouter],
- //   ["sms", smsRouter],
     ["order-detail",OrderDetailRouter],
     ["categories", categoryRouter]
 ]
