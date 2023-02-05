@@ -53,6 +53,12 @@ export const getOne = async (req: Request, res: Response): Promise<Response> => 
       },
     });
 
+    if(!category){
+      return res
+      .status(400)
+      .json({ ok: false, message: "Category not found" });
+    }
+
     return res
       .status(200)
       .json({ ok: true, body: category, message: "Category found" });
@@ -67,24 +73,51 @@ export const getOne = async (req: Request, res: Response): Promise<Response> => 
 
 export const update = async (req: Request, res: Response): Promise<Response> => {
   try {
-    const idCategory = Number(req.params.idCategory);
+
     const { max_storage_temperature, min_storage_temperature } = req.body;
+    const idCategory = Number(req.params.idCategory);
+    
+    const category = await prisma.category.findUnique({
+      where: {
+        id: idCategory,
+      },
+    });
 
-    if(max_storage_temperature < min_storage_temperature){
+    if (!category){
+      return res
+      .status(400)
+      .json({ ok: false, message: "Category not found" });
+    }
 
+    if ( max_storage_temperature && !min_storage_temperature && max_storage_temperature < category.min_storage_temperature! ){
       return res
         .status(400)
         .json({ ok: false, message: "Max temp can't be lower than min temp" });
     }
-    
-    const category = await prisma.category.update({
+
+    if ( min_storage_temperature && !max_storage_temperature && min_storage_temperature > category.max_storage_temperature! ){
+      
+      return res
+        .status(400)
+        .json({ ok: false, message: "Min temp can't be upper than max temp" });
+    }
+
+    if ( max_storage_temperature && min_storage_temperature && min_storage_temperature > max_storage_temperature ){
+      
+      return res
+        .status(400)
+        .json({ ok: false, message: "Max temp can't be lower than min temp" });
+      
+    }
+
+    const categoryUpdated = await prisma.category.update({
       where: { id: idCategory },
       data: req.body,
     });
 
     return res
       .status(200)
-      .json({ok: true, body: category, message: "Category updated successfully"});
+      .json({ok: true, body: categoryUpdated, message: "Category updated successfully"});
 
   } catch (error) {
 
@@ -97,12 +130,24 @@ export const update = async (req: Request, res: Response): Promise<Response> => 
 export const remove = async (req: Request, res: Response): Promise<Response> => {
   try {
     const idCategory = Number(req.params.idCategory);
+    const category = await prisma.category.findUnique({
+      where: {
+        id: idCategory,
+      },
+    });
+
+    if(!category){
+      return res
+      .status(400)
+      .json({ ok: false, message: "Category not found" });
+    }
+
     await prisma.category.delete({
       where: { id : idCategory},
     });
     
     return res
-      .status(204)
+      .status(200)
       .json({ ok: true, body: "", message: "Deleted" });
 
   } catch (error) {

@@ -51,8 +51,8 @@ model Supplier {
 model Category{
   id  Int  @id @default(autoincrement())
   name String
-  max_storage_temperature Float?
-  min_storage_temperature Float?
+  max_storage_temperature Float?  @default(0.0)
+  min_storage_temperature Float?  @default(0.0)
   product Product[]
 }
 
