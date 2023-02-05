@@ -68,6 +68,15 @@ export const getOne = async (req: Request, res: Response): Promise<Response> => 
 export const update = async (req: Request, res: Response): Promise<Response> => {
   try {
     const idCategory = Number(req.params.idCategory);
+    const { max_storage_temperature, min_storage_temperature } = req.body;
+
+    if(max_storage_temperature < min_storage_temperature){
+
+      return res
+        .status(400)
+        .json({ ok: false, message: "Max temp can't be lower than min temp" });
+    }
+    
     const category = await prisma.category.update({
       where: { id: idCategory },
       data: req.body,
