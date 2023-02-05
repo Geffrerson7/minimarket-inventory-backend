@@ -1,14 +1,11 @@
 import type { Request, Response } from "express";
-import { Prisma, PrismaClient } from "@prisma/client";
 import { User } from "@prisma/client";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import prisma from "../../datasource";
 import { verify_authentication } from "../authenticate";
 
 const secret_key = process.env.SECRET_KEY || 'Alguna llave secreta';
-
-const prisma = new PrismaClient();
 
 export const findAll = async (req: Request, res: Response): Promise<void> => {
   try {
