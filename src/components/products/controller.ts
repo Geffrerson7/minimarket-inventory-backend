@@ -1,7 +1,5 @@
 import type { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient();
+import prisma from "../../datasource/";
 
 // CREATE product
 
@@ -14,7 +12,6 @@ export const store = async (req: Request, res: Response): Promise<void> => {
             body: data,
             message: "Product created successfully" });
     } catch (error) {
-        console.log(error)
         res.status(500).json({ ok: false, message: error });
     }
 };
@@ -46,6 +43,7 @@ export const get_product_by_id = async (req: Request, res: Response) => {
         res.status(200).json({
             ok: "true",
             data: products,
+            message: "Get this product according to ID"
         });
     } catch (error) {
         res.status(500).json({ ok: false, message: error });
