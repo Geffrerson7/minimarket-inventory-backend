@@ -7,7 +7,7 @@ const routes = [
     ["users",userRouter],
     ["suppliers", SupplierRouter],
     ["order-detail",OrderDetailRouter],
-    ["categories", categoryRouter]
+    ["categories", categoryRouter],
 ]
 
 export const router = (app:any) => {
