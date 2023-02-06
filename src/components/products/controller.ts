@@ -57,7 +57,6 @@ export const get_product_by_id = async (req: Request, res: Response) => {
 
 export const update_product = async (req: Request, res: Response): Promise<Response> => {
   const id: number = parseInt(req.params.id);
-  console.log('hola')
   try {
     const products = await prisma.product.update({
       where: { id },
@@ -70,8 +69,6 @@ export const update_product = async (req: Request, res: Response): Promise<Respo
         },
       },
     });
-    console.log(checkProductStock);
-    console.log(checkProductStock.length);
     if (checkProductStock.length != 0) {
       sendSMS(checkProductStock);
     }
@@ -80,7 +77,6 @@ export const update_product = async (req: Request, res: Response): Promise<Respo
       data: products,
     });
   } catch (error) {
-    console.log(error);
     return res.status(204).json({ ok: false, message: error });
   }
 };
