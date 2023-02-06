@@ -1,8 +1,6 @@
 import type { Request, Response } from "express";
-import { PrismaClient } from "@prisma/client";
+import prisma from "../../datasource/";
 import sendSMS from "../../services/twilio";
-
-const prisma = new PrismaClient();
 
 // CREATE product
 
@@ -47,6 +45,7 @@ export const get_product_by_id = async (req: Request, res: Response) => {
     res.status(200).json({
       ok: "true",
       data: products,
+            message: "Get this product according to ID"
     });
   } catch (error) {
     res.status(500).json({ ok: false, message: error });

@@ -1,7 +1,5 @@
-import { PrismaClient } from "@prisma/client";
 import type { Request, Response } from "express";
-
-const prisma = new PrismaClient();
+import prisma from "../../datasource";
 
 export const store = async (req: Request, res: Response): Promise<void> => {
   try {
@@ -33,7 +31,16 @@ export const store = async (req: Request, res: Response): Promise<void> => {
 
 export const findAll = async (_req: Request, res: Response): Promise<void> => {
   try {
-    const orders = await prisma.order.findMany();
+    const orders = await prisma.order.findMany({
+      include: {
+        client: true,
+        order_details: {
+          include: {
+            product: true,
+          },
+        },
+      },
+    });
     res.json({ ok: true, body: orders });
   } catch (error) {
     res.status(500).json({ ok: false, body: error, message: "Server Error" });

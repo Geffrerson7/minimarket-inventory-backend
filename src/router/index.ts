@@ -1,5 +1,5 @@
 import { ProductRouter, OrderRouter, ClientRouter, userRouter, SupplierRouter, OrderDetailRouter, categoryRouter } from "../components";
- 
+
 const routes = [
     ["products", ProductRouter],
     ["clients", ClientRouter],
