@@ -1,4 +1,4 @@
-import { ProductRouter, OrderRouter, ClientRouter, userRouter, SupplierRouter, OrderDetailRouter, categoryRouter, smsRouter } from "../components";
+import { ProductRouter, OrderRouter, ClientRouter, userRouter, SupplierRouter, OrderDetailRouter, categoryRouter } from "../components";
  
 const routes = [
     ["products", ProductRouter],
@@ -8,7 +8,6 @@ const routes = [
     ["suppliers", SupplierRouter],
     ["order-detail",OrderDetailRouter],
     ["categories", categoryRouter],
-    ["sms", smsRouter]
 ]
 
 export const router = (app:any) => {
