@@ -1,7 +1,5 @@
-import { Prisma, PrismaClient } from "@prisma/client";
 import type { Request, Response } from "express";
-
-const prisma = new PrismaClient();
+import prisma from "../../datasource";
 
 export const store = async (req: Request, res: Response): Promise<Response> => {
   try {

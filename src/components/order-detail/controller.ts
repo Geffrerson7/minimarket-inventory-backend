@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import prisma from "../../datasource/";
+import prisma from "../../datasource";
 
 export const store = async (req: Request, res: Response): Promise<void> => {
     try {
