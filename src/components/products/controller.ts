@@ -54,19 +54,19 @@ export const get_product_by_id = async (req: Request, res: Response) => {
 
 export const update_product = async (req: Request, res: Response) => {
     const id: number = parseInt(req.params.id);
-    const { data } = req.body;
+    const data  = req.body;
     try {
         const products = await prisma.product.update({
             where: { id },
             data: data
         });
-        res.status(200).json({
-            message: "Product updated successfully",
-            data: products,
-        });
+        res.status(201).json({ 
+            ok: true,
+            body: products,
+            message: "Product updated successfully" });
 
     } catch (error) {
-        res.status(204).json({ ok: false, message: error });
+        res.status(500).json({ ok: false, body:error,message: "Server Error" });
     }
 };
 
