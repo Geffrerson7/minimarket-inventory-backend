@@ -1,23 +1,24 @@
-import { Prisma, PrismaClient } from "@prisma/client";
 import type { Request, Response } from "express";
 import prisma from "../../datasource";
 
 export const store = async (req: Request, res: Response): Promise<void> => {
   try {
-    const client = await prisma.client.create({ data: req.body });
-    res
-      .status(201)
-      .json({ ok: true, body: client, message: "Client created successfully" });
-  } catch (error) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === "P2002") {
-        res
-          .status(400)
-          .json({ ok: false, body: "", message: "Client already saved" });
-      }
+    const data = req.body;
+    const client_valid = await prisma.client.findUnique({
+      where: { document_id: data.document_id },
+    });
+    if (client_valid) {
+      res.status(400).json({ ok: false, message: "Client already saved" });
     } else {
-      res.status(500).json({ ok: false, body: error, message: "Server Error" });
+      const client = await prisma.client.create({ data });
+      res.status(201).json({
+        ok: true,
+        body: client,
+        message: "Client created successfully",
+      });
     }
+  } catch (error) {
+    res.status(500).json({ ok: false, body: error, message: "Server Error" });
   }
 };
 
@@ -67,7 +68,7 @@ export const remove = async (req: Request, res: Response): Promise<void> => {
     await prisma.client.delete({
       where: { id },
     });
-    res.status(204).json({ ok: true, body: "", message: "Deleted" });
+    res.status(204).json({ ok: true, body: "Client was deleted", message: "Deleted" });
   } catch (error) {
     res.status(500).json({ ok: false, body: error, message: "Server Error" });
   }
