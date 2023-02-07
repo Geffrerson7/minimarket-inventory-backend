@@ -58,7 +58,7 @@ export const updateOne = async (req: Request, res: Response): Promise<void> => {
                 id: data.orderDetail_id
             },
         })
-        res.json({ ok: true, data: updateOrderDetail, message: "Order detail updated!" });
+        res.status(200).json({ ok: true, data: updateOrderDetail, message: "Order detail updated!" });
     } catch (error) {
         res.status(500).json({ ok: false, message: error });
     }
