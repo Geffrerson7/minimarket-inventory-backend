@@ -1,4 +1,4 @@
-# System Inventory
+# MiniMarket Inventory Backend
 ## Description
 
 It is an API that registers, updates and deletes the stock of products, purchase orders, customers, suppliers, sends an SMS to notify the lack of stock of a product and updates the relative humidity and temperature of the product warehouse in real time. Designed with Node, Express, Prisma, Supabase, TypeScript, Twilio and Pusher.
@@ -31,7 +31,7 @@ It is an API that registers, updates and deletes the stock of products, purchase
 
 ## Part Frontend of this project base in Angular
 
-https://github.com/Geffrerson7/Proyecto-Unidad-8-Front
+https://github.com/Geffrerson7/minimarket-inventory-frontend
 
 ## Server for reading and barcodes in real time
 
